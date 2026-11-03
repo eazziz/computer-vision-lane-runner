@@ -23,6 +23,7 @@ export default function RunnerGame() {
   const debugRef = useRef(false);
   const [showDebug, setShowDebug] = useState(false);
   const [fullscreen, setFullscreen] = useState(false);
+  const [horizontal, setHorizontal] = useState(false);
   const [notice, setNotice] = useState('');
   const [ui, setUi] = useState({ mode: 'camera' as Mode, phase: 'idle', cameraReady: false,
     cameraStarting: false, status: 'Step into the middle to play', sessionPhase: 'waiting',
@@ -284,11 +285,12 @@ export default function RunnerGame() {
   };
   const cameraMode = ui.mode === 'camera';
   const active = ['running', 'countdown'].includes(ui.phase);
-  return <div className="tv-layout runner-layout">
+  return <div className={`tv-layout runner-layout${horizontal ? ' layout-horizontal' : ''}`}>
     <section className="game-panel" aria-label="Lane Runner game">
       <header className="game-header">
         <h1>LANE RUNNER</h1>
         <div className="display-controls">
+          <button onClick={() => setHorizontal(value => !value)} aria-label={`Switch to ${horizontal ? 'vertical' : 'horizontal'} layout`} aria-pressed={horizontal}>LAYOUT: {horizontal ? 'HORIZONTAL' : 'VERTICAL'}</button>
           <button onClick={() => { debugRef.current = !showDebug; setShowDebug(!showDebug); }} aria-pressed={showDebug} aria-controls="calibration-debug">DEBUG {showDebug ? 'ON' : 'OFF'}</button>
           <button onClick={() => actionRef.current?.mute()} aria-pressed={ui.muted}>SOUND {ui.muted ? 'OFF' : 'ON'}</button>
           <button onClick={toggleFullscreen}>{fullscreen ? 'EXIT FULL SCREEN' : 'FULL SCREEN'}</button>
@@ -327,7 +329,7 @@ export default function RunnerGame() {
       <video ref={videoRef} autoPlay playsInline muted className="camera-image" />
       <canvas ref={overlayRef} className="camera-image camera-overlay" />
       {!ui.cameraReady && <div className="camera-placeholder">
-        {cameraMode ? <><span className="camera-symbol" aria-hidden="true">◎</span><p>YOUR CAMERA VIEW</p><span>Enable the camera above to see yourself here.</span></>
+        {cameraMode ? <><span className="camera-symbol" aria-hidden="true">◎</span><p>YOUR CAMERA VIEW</p><span>Enable the camera to see yourself here.</span></>
           : <div className="runner-keyboard-panel"><span className="runner-kicker">KEYBOARD MODE</span><h2>TAKE IT FOR A RUN</h2><p>← → change lanes<br/>Space / ↑ jump<br/>Hold ↓ to duck</p>
             <div className="runner-touch-controls"><button aria-label="Move left" onClick={() => actionRef.current?.lane(Math.max(-1, ui.lane - 1))}>←</button><button onClick={() => actionRef.current?.jump()}>JUMP</button><button onPointerDown={e => { e.currentTarget.setPointerCapture(e.pointerId); actionRef.current?.duck(true); }} onPointerUp={() => actionRef.current?.duck(false)} onPointerCancel={() => actionRef.current?.duck(false)} onLostPointerCapture={() => actionRef.current?.duck(false)}>DUCK</button><button aria-label="Move right" onClick={() => actionRef.current?.lane(Math.min(1, ui.lane + 1))}>→</button></div>
             <button className="recalibrate-button" onClick={() => void actionRef.current?.camera()}>SWITCH TO CAMERA</button>

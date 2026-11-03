@@ -40,6 +40,10 @@ Prefer to try it without a webcam? Click **Try with Keyboard** on Lane Runner's 
 
 Clear enough room to move comfortably. Use **Full Screen** for an event display and **Sound** to toggle audio. Stop the development server with Ctrl+C.
 
+### Horizontal and vertical layouts
+
+Click **Layout: Vertical** in the game header to switch to **Horizontal** at any time, including during a run. Click it again to return to the original vertical layout (game above, camera below). Horizontal mode puts the camera and body overlay on the left and the game on the right, using equal-size 9:8 panels matching the original portrait display's halves. It centers the panels with letterboxing when needed so they keep their proportions. Switching layouts does not restart the game or camera tracking.
+
 ## Using it at an event or in a classroom
 
 - Position the webcam so the player's head, shoulders, and hips remain visible during movement. Even lighting and an uncluttered background help.
