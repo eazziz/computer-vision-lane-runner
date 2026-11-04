@@ -1,10 +1,10 @@
 /* Base display, header, font, instructions, and camera styles are in index.css. */
-/* Keep the two portrait-display panels at the same 9:8 ratio side by side.
-   Center the layout with letterboxing rather than stretching either panel. */
+/* Fill the viewport with two equal-width panels in horizontal mode. */
 .tv-app { display: grid; place-items: center; background: #101719; }
 .runner-layout.layout-horizontal {
-  width: min(100vw, 225dvh);
-  height: min(100dvh, 44.444444vw);
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   grid-template-rows: minmax(0, 1fr);
 }

@@ -2,7 +2,7 @@
 
 **Your body is the controller.** Move between lanes, jump over barriers, and duck under gates using an ordinary webcam.
 
-Lane Runner is a three-lane endless runner built with computer vision. Created by [Edred Azziz](https://github.com/eazziz)
+Lane Runner is a three-lane endless runner built with computer vision. Created by [Edred Azziz](https://edredazziz.com/)
 
 ![Lane Runner gameplay preview](docs/lane-runner-preview.jpg)
 
